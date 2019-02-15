@@ -18,8 +18,10 @@ import com.subciber.configuracion.exception.DaoException;
 import com.subciber.configuracion.property.MessageProvider;
 
 /**
- * @author josep
- *
+ * @description implementacion de la interface AplicacionBusiness
+ * @author David Villanueva
+ * @version 0.1, 14/02/2019
+ * @update
  */
 @Dependent
 public class AplicacionBusinessImpl implements AplicacionBusiness, Serializable {

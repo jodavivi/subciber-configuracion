@@ -74,9 +74,9 @@ public class AplicacionRestImpl implements AplicacionRest{
 			HttpSession session = httpServletRequest.getSession(false);
 			System.out.println("Session False: " + session.getId());
 			*/
-			RequestGenericDto<Integer> request = utilitario.generateRequest(i, httpHeaders, uriInfo);
+			//RequestGenericDto<Integer> request = utilitario.generateRequest(i, httpHeaders, uriInfo);
 			//System.out.println(request.getAuditRequest().getAplicacion());
-			System.out.println(utilitario.convertObjectToJson(request));
+			//System.out.println(utilitario.convertObjectToJson(request));
 			getAplicacion = aplicacionBusiness.get(1);
 			
 			response.getAuditResponse().setCodigoRespuesta(messageProvider.codigoExito);
@@ -89,9 +89,9 @@ public class AplicacionRestImpl implements AplicacionRest{
 		}catch (BusinessException e) {
 			response.getAuditResponse().setCodigoRespuesta(e.getCodigo());
 			response.getAuditResponse().setMensajeRespuesta(e.getMensaje());
-		}catch(GeneralException e) {
-			response.getAuditResponse().setCodigoRespuesta(e.getCodigo());
-			response.getAuditResponse().setMensajeRespuesta(e.getMensaje());
+		//}catch(GeneralException e) {
+		//	response.getAuditResponse().setCodigoRespuesta(e.getCodigo());
+		//	response.getAuditResponse().setMensajeRespuesta(e.getMensaje());
 		}catch (Exception e) {
 			response.getAuditResponse().setCodigoRespuesta(messageProvider.codigoErrorIdt3);
 			response.getAuditResponse().setMensajeRespuesta(MessageFormat.format(messageProvider.mensajeErrorIdt3, clase, metodo, e.getStackTrace()[0].getLineNumber(),  e.getMessage()));

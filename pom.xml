@@ -1,21 +1,23 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.subciber.configuracion</groupId>
-  <artifactId>subciber-configuracion</artifactId>
-  <version>1.0</version>
-  <packaging>pom</packaging>
-  <modules>
-  	<module>subciber-configuracion-dao</module>
-  	<module>subciber-configuracion-business</module>
-  	<module>subciber-configuracion-rest</module>
-  	<module>subciber-configuracion-i18n</module>
-  	<module>subciber-configuracion-shared</module>
-  	<module>subciber-configuracion-ear</module>
-  	<module>subciber-configuracion-entity</module>
-  	<module>subciber-configuracion-persistence</module>
-  </modules>
-  
-  <properties>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.subciber.configuracion</groupId>
+	<artifactId>subciber-configuracion</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>subciber-configuracion-dao</module>
+		<module>subciber-configuracion-business</module>
+		<module>subciber-configuracion-rest</module>
+		<module>subciber-configuracion-i18n</module>
+		<module>subciber-configuracion-shared</module>
+		<module>subciber-configuracion-ear</module>
+		<module>subciber-configuracion-entity</module>
+		<module>subciber-configuracion-persistence</module>
+	</modules>
+
+	<properties>
 		<project.build.sourceencoding>UTF-8</project.build.sourceencoding>
 		<version.java>1.8</version.java>
 		<version.jee>7.0</version.jee>
@@ -40,8 +42,8 @@
 		<!-- EAR Plugin -->
 		<version.ear.plugin>2.10.1</version.ear.plugin>
 	</properties>
-	
-		<dependencyManagement>
+
+	<dependencyManagement>
 		<dependencies>
 			<!-- API Java EE -->
 			<dependency>
@@ -86,6 +88,11 @@
 				<artifactId>slf4j-api</artifactId>
 				<scope>provided</scope>
 				<version>1.7.5</version>
+			</dependency>
+			<dependency>
+				<groupId>com.sun.mail</groupId>
+				<artifactId>javax.mail</artifactId>
+				<version>1.6.0</version>
 			</dependency>
 			<dependency>
 				<groupId>org.jboss.resteasy</groupId>
@@ -148,6 +155,7 @@
 				<type>war</type>
 				<scope>compile</scope>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 	<build>
