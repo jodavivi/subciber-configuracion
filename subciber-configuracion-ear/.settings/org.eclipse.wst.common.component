@@ -29,6 +29,9 @@
         <dependent-module archiveName="activation-1.1.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/javax/activation/activation/1.1/activation-1.1.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="commons-email-1.5.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/org/apache/commons/commons-email/1.5/commons-email-1.5.jar">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <dependent-module archiveName="subciber-configuracion-shared-1.0.jar" deploy-path="/" handle="module:/resource/subciber-configuracion-shared/subciber-configuracion-shared">
             <dependency-type>uses</dependency-type>
         </dependent-module>

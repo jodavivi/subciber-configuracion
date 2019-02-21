@@ -18,55 +18,61 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table( schema="\"Configuracion\"",name="\"CnfAplicacion\"")
+@Table( schema="\"Configuracion\"",name="\"Aplicacion\"")
 public class CnfAplicacion implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@SequenceGenerator(name = "seq_gen",schema="\"Configuracion\"", sequenceName = "\"CnfAplicacion_Id_seq\"", allocationSize = 1)
+	@SequenceGenerator(name = "seq_gen",schema="\"Configuracion\"", sequenceName = "\"Aplicacion_Id_seq\"", allocationSize = 1)
 	@GeneratedValue(generator = "seq_gen")
 	@Column(name="\"Id\"")
 	private Integer id;
-
-	@Column(name="\"Codigo\"")
-	private String codigo;
-
-	@Column(name="\"EmailNotificacion\"")
-	private String emailNotificacion;
-
+	
 	@Column(name="\"EstadoId\"")
 	private Integer estadoId;
 
+	@Column(name="\"UsuarioCreador\"")
+	private String usuarioCreador;
+	
 	@Column(name="\"FechaCreacion\"")
 	private LocalDateTime fechaCreacion;
+	
+	@Column(name="\"TerminalCreacion\"")
+	private String terminalCreacion;
+	
+	@Column(name="\"UsuarioModificador\"")
+	private String usuarioModificador;
 
 	@Column(name="\"FechaModificacion\"")
 	private LocalDateTime fechaModificacion;
-
-	@Column(name="\"Logo\"")
-	private String logo;
-
-	@Column(name="\"NumeroIdentificacion\"")
-	private String numeroIdentificacion;
-
-	@Column(name="\"RazonSocial\"")
-	private String razonSocial;
-
-	@Column(name="\"TerminalCreacion\"")
-	private String terminalCreacion;
-
+	
 	@Column(name="\"TerminalModificador\"")
 	private String terminalModificador;
 
 	@Column(name="\"TransaccionId\"")
 	private String transaccionId;
+	
+	@Column(name="\"Codigo\"")
+	private String codigo;
 
-	@Column(name="\"UsuarioCreador\"")
-	private String usuarioCreador;
+	@Column(name="\"RazonSocial\"")
+	private String razonSocial;
 
-	@Column(name="\"UsuarioModificador\"")
-	private String usuarioModificador;
+	@Column(name="\"NumeroIdentificacion\"")
+	private String numeroIdentificacion;
+	
+	@Column(name="\"EmailNotificacion\"")
+	private String emailNotificacion;
+
+	@Column(name="\"Logo\"")
+	private String logo;
+	
+	@Column(name="\"Url\"")
+	private String url;
+	
+	@Column(name="\"Path\"")
+	private String path;
 
 	public CnfAplicacion() {
 	}
@@ -79,28 +85,20 @@ public class CnfAplicacion implements Serializable {
 		this.id = id;
 	}
 
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-
-	public String getEmailNotificacion() {
-		return emailNotificacion;
-	}
-
-	public void setEmailNotificacion(String emailNotificacion) {
-		this.emailNotificacion = emailNotificacion;
-	}
-
 	public Integer getEstadoId() {
 		return estadoId;
 	}
 
 	public void setEstadoId(Integer estadoId) {
 		this.estadoId = estadoId;
+	}
+
+	public String getUsuarioCreador() {
+		return usuarioCreador;
+	}
+
+	public void setUsuarioCreador(String usuarioCreador) {
+		this.usuarioCreador = usuarioCreador;
 	}
 
 	public LocalDateTime getFechaCreacion() {
@@ -111,44 +109,28 @@ public class CnfAplicacion implements Serializable {
 		this.fechaCreacion = fechaCreacion;
 	}
 
-	public LocalDateTime getFechaModificacion() {
-		return fechaModificacion;
-	}
-
-	public void setFechaModificacion(LocalDateTime fechaModificacion) {
-		this.fechaModificacion = fechaModificacion;
-	}
-
-	public String getLogo() {
-		return logo;
-	}
-
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
-
-	public String getNumeroIdentificacion() {
-		return numeroIdentificacion;
-	}
-
-	public void setNumeroIdentificacion(String numeroIdentificacion) {
-		this.numeroIdentificacion = numeroIdentificacion;
-	}
-
-	public String getRazonSocial() {
-		return razonSocial;
-	}
-
-	public void setRazonSocial(String razonSocial) {
-		this.razonSocial = razonSocial;
-	}
-
 	public String getTerminalCreacion() {
 		return terminalCreacion;
 	}
 
 	public void setTerminalCreacion(String terminalCreacion) {
 		this.terminalCreacion = terminalCreacion;
+	}
+
+	public String getUsuarioModificador() {
+		return usuarioModificador;
+	}
+
+	public void setUsuarioModificador(String usuarioModificador) {
+		this.usuarioModificador = usuarioModificador;
+	}
+
+	public LocalDateTime getFechaModificacion() {
+		return fechaModificacion;
+	}
+
+	public void setFechaModificacion(LocalDateTime fechaModificacion) {
+		this.fechaModificacion = fechaModificacion;
 	}
 
 	public String getTerminalModificador() {
@@ -167,20 +149,60 @@ public class CnfAplicacion implements Serializable {
 		this.transaccionId = transaccionId;
 	}
 
-	public String getUsuarioCreador() {
-		return usuarioCreador;
+	public String getCodigo() {
+		return codigo;
 	}
 
-	public void setUsuarioCreador(String usuarioCreador) {
-		this.usuarioCreador = usuarioCreador;
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 
-	public String getUsuarioModificador() {
-		return usuarioModificador;
+	public String getRazonSocial() {
+		return razonSocial;
 	}
 
-	public void setUsuarioModificador(String usuarioModificador) {
-		this.usuarioModificador = usuarioModificador;
+	public void setRazonSocial(String razonSocial) {
+		this.razonSocial = razonSocial;
+	}
+
+	public String getNumeroIdentificacion() {
+		return numeroIdentificacion;
+	}
+
+	public void setNumeroIdentificacion(String numeroIdentificacion) {
+		this.numeroIdentificacion = numeroIdentificacion;
+	}
+
+	public String getEmailNotificacion() {
+		return emailNotificacion;
+	}
+
+	public void setEmailNotificacion(String emailNotificacion) {
+		this.emailNotificacion = emailNotificacion;
+	}
+
+	public String getLogo() {
+		return logo;
+	}
+
+	public void setLogo(String logo) {
+		this.logo = logo;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 }
