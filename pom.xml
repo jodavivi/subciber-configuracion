@@ -15,6 +15,7 @@
 		<module>subciber-configuracion-ear</module>
 		<module>subciber-configuracion-entity</module>
 		<module>subciber-configuracion-persistence</module>
+		<module>subciber-configuracion-client</module>
 	</modules>
 
 	<properties>
@@ -51,6 +52,12 @@
 				<artifactId>javaee-web-api</artifactId>
 				<version>${version.jee}</version>
 				<scope>provided</scope>
+			</dependency>
+			<dependency>
+			    <groupId>javax.servlet</groupId>
+			    <artifactId>javax.servlet-api</artifactId>
+			    <version>4.0.1</version>
+			    <scope>provided</scope>
 			</dependency>
 			<!-- DrivePostgreSQL -->
 			<dependency>
@@ -144,6 +151,13 @@
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>subciber-configuracion-i18n</artifactId>
+				<version>1.0</version>
+				<type>jar</type>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>subciber-configuracion-client</artifactId>
 				<version>1.0</version>
 				<type>jar</type>
 				<scope>compile</scope>

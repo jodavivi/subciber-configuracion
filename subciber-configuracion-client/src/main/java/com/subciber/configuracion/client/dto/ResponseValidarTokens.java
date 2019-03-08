@@ -1,47 +1,35 @@
-/**
- * 
- */
-package com.subciber.configuracion.dto;
+package com.subciber.configuracion.client.dto;
 
 import java.io.Serializable;
 
 import com.subciber.configuracion.base.dto.AuditResponseDto;
 
-/**
- * @author josep
- *
- */
-public class ResponseGenericDto<T> implements Serializable{
+public class ResponseValidarTokens implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	private AuditResponseDto auditResponse;
-	private T objectResponse;
+	private EstructuraTokensDto objectResponse;
 	
-	public ResponseGenericDto() {
+	public ResponseValidarTokens(){
 		super();
 		auditResponse = new AuditResponseDto();
 	}
-
+	
 	public AuditResponseDto getAuditResponse() {
 		return auditResponse;
 	}
-
 	public void setAuditResponse(AuditResponseDto auditResponse) {
 		this.auditResponse = auditResponse;
-		
 	}
-
-	public T getObjectResponse() {
+	public EstructuraTokensDto getObjectResponse() {
 		return objectResponse;
 	}
-
-	public void setObjectResponse(T objectResponse) {
+	public void setObjectResponse(EstructuraTokensDto objectResponse) {
 		this.objectResponse = objectResponse;
 	}
-
 	@Override
 	public String toString() {
-		return "ResponseGenericDto [auditResponse=" + auditResponse + ", objectResponse=" + objectResponse + "]";
+		return "ResponseValidarTokens [auditResponse=" + auditResponse + ", objectResponse=" + objectResponse + "]";
 	}
 	
 }

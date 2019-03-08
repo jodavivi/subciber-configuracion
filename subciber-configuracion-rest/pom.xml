@@ -13,6 +13,10 @@
 			<groupId>javax</groupId>
 			<artifactId>javaee-web-api</artifactId>
 		</dependency>
+		<dependency>
+		    <groupId>javax.servlet</groupId>
+		    <artifactId>javax.servlet-api</artifactId>
+		</dependency>
 		<!-- Utility -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -53,6 +57,10 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>subciber-configuracion-persistence</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>subciber-configuracion-client</artifactId>
 		</dependency>
 	</dependencies>
   

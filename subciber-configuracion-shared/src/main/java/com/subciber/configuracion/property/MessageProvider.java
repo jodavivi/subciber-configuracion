@@ -31,6 +31,24 @@ public class MessageProvider {
 	@Property(value = "mensaje.error.idf3", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
 	public String mensajeErrorIdf3;
 
+	@Property(value = "codigo.error.idf4", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public Integer codigoErrorIdf4;
+	
+	@Property(value = "mensaje.error.idf4", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public String mensajeErrorIdf4;
+
+	@Property(value = "codigo.error.idf5", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public Integer codigoErrorIdf5;
+	
+	@Property(value = "mensaje.error.idf5", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public String mensajeErrorIdf5;
+	
+	@Property(value = "codigo.error.idf6", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public Integer codigoErrorIdf6;
+	
+	@Property(value = "mensaje.error.idf6", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public String mensajeErrorIdf6;
+	
 	
 	@Property(value = "codigo.error.idt1", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
 	public Integer codigoErrorIdt1;

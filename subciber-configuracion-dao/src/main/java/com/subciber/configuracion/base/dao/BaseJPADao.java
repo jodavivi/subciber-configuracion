@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Table;
 
-import com.subciber.configuracion.util.ConstantesConfig;
+import com.subciber.configuracion.dao.util.ConfigDao;
 
 /**
  * @author josep
@@ -21,7 +21,7 @@ import com.subciber.configuracion.util.ConstantesConfig;
 public abstract class BaseJPADao<T> implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	@PersistenceContext(unitName = ConstantesConfig.persistenceUnit)
+	@PersistenceContext(unitName = ConfigDao.persistenceUnit)
 	protected EntityManager entityManager;
 	protected Class<T> entityClass;
 	protected String tableName;

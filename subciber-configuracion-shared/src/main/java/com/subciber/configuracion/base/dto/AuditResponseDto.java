@@ -35,5 +35,10 @@ public class AuditResponseDto implements Serializable{
 	public void setMensajeRespuesta(String mensajeRespuesta) {
 		this.mensajeRespuesta = mensajeRespuesta;
 	}
+	@Override
+	public String toString() {
+		return "AuditResponseDto [transaccionId=" + transaccionId + ", codigoRespuesta=" + codigoRespuesta
+				+ ", mensajeRespuesta=" + mensajeRespuesta + "]";
+	}
 	
 }

@@ -22,6 +22,9 @@
         <dependent-module archiveName="subciber-configuracion-persistence-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/subciber-configuracion-persistence/subciber-configuracion-persistence">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="subciber-configuracion-client-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/subciber-configuracion-client/subciber-configuracion-client">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="subciber-configuracion-rest"/>
         <property name="java-output-path" value="/subciber-configuracion-rest/target/classes"/>
     </wb-module>
