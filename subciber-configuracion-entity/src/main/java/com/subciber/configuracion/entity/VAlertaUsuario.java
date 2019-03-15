@@ -49,6 +49,9 @@ public class VAlertaUsuario implements Serializable {
 	@Column(name="\"Prioridad\"")
 	private String prioridad;
 	
+	@Column(name="\"CodigoPrioridad\"")
+	private String codigoPrioridad;
+	
 	@Column(name="\"AlertaTipoId\"")
 	private Integer alertaTipoId;
 	
@@ -152,6 +155,14 @@ public class VAlertaUsuario implements Serializable {
 
 	public void setFechaCreacion(LocalDateTime fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
+	}
+
+	public String getCodigoPrioridad() {
+		return codigoPrioridad;
+	}
+
+	public void setCodigoPrioridad(String codigoPrioridad) {
+		this.codigoPrioridad = codigoPrioridad;
 	}
 	
 }

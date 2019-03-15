@@ -12,7 +12,35 @@ import javax.enterprise.context.Dependent;
  */
 @Dependent
 public class MessageProvider {
+	
 
+	@Property(value = "LOG.MESSAGE.INIT", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public String logMensajeInicio;
+	@Property(value = "LOG.MESSAGE.INPUT", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public String logMensajeInp;
+	@Property(value = "LOG.MESSAGE.SERVICE.INPUT", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public String logMensajeServicioInp;
+	@Property(value = "LOG.MESSAGE.DATA.INPUT", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public String logMensajeDataInp;
+	@Property(value = "LOG.MESSAGE.OUTPUT", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public String logMensajeOut;
+	@Property(value = "LOG.MESSAGE.SERVICE.OUTPUT", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public String logMensajeServiceOut;
+	@Property(value = "LOG.MESSAGE.SUCCESS", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public String logMensajeExito;
+	@Property(value = "LOG.MESSAGE.EXCEPTION", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public String logMensajeError;
+	@Property(value = "LOG.MESSAGE.TIME", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public String logMensajeTime;
+	@Property(value = "LOG.MESSAGE.END", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public String logMensajeEnd;
+	@Property(value = "LOG.MESSAGE.QUERY", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public String logMensajeQuery;
+	@Property(value = "LOG.MESSAGE.QUERY.SUCCESS", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public String logMensajeDataExito;
+	@Property(value = "LOG.MESSAGE.RESPONSE_NULL", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public String logMensajeNull;
+	
 	@Property(value = "codigo.exito", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
 	public Integer codigoExito;
 	
@@ -48,6 +76,12 @@ public class MessageProvider {
 	
 	@Property(value = "mensaje.error.idf6", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
 	public String mensajeErrorIdf6;
+	
+	@Property(value = "codigo.error.idf7", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public Integer codigoErrorIdf7;
+	
+	@Property(value = "mensaje.error.idf7", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")
+	public String mensajeErrorIdf7;
 	
 	
 	@Property(value = "codigo.error.idt1", resourceBundleBaseName = "com.subciber.configuracion.i18n.mensajes")

@@ -17,10 +17,8 @@ import javax.ws.rs.core.UriInfo;
 
 import com.subciber.configuracion.business.api.AplicacionBusiness;
 import com.subciber.configuracion.dto.CnfAplicacionDto;
-import com.subciber.configuracion.dto.RequestGenericDto;
 import com.subciber.configuracion.dto.ResponseGenericDto;
 import com.subciber.configuracion.exception.BusinessException;
-import com.subciber.configuracion.exception.GeneralException;
 import com.subciber.configuracion.property.MessageProvider;
 import com.subciber.configuracion.rest.api.AplicacionRest;
 import com.subciber.configuracion.util.Utilitario;

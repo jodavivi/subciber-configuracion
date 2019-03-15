@@ -17,6 +17,7 @@ public class AlertasSistemaDto implements Serializable{
 	private String titulo;
 	private String descripcion;
 	private String prioridad;
+	private String codigoPrioridad;
 	private String alertaTipo;
 	private String tiempoExpirado;
 	
@@ -55,6 +56,12 @@ public class AlertasSistemaDto implements Serializable{
 	}
 	public void setTiempoExpirado(String tiempoExpirado) {
 		this.tiempoExpirado = tiempoExpirado;
+	}
+	public String getCodigoPrioridad() {
+		return codigoPrioridad;
+	}
+	public void setCodigoPrioridad(String codigoPrioridad) {
+		this.codigoPrioridad = codigoPrioridad;
 	}
 	
 }

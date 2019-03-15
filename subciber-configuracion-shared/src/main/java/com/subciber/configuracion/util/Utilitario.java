@@ -54,25 +54,30 @@ public class Utilitario {
 		RequestGenericDto<T> response = null;
 		try {
 		 
-			 response = new RequestGenericDto<>();
-			 if(isNullOrEmpty(httpHeaders.getHeaderString("transaccionId"))){
-				 throw new  GeneralException(messageProvider.codigoErrorIdf3, MessageFormat.format(messageProvider.mensajeErrorIdf3,"1"));
-			 }
-			 if(isNullOrEmpty(httpHeaders.getHeaderString("aplicacion"))){
-				 throw new  GeneralException(messageProvider.codigoErrorIdf3, MessageFormat.format(messageProvider.mensajeErrorIdf3,"2"));
-			 }
-			 if(isNullOrEmpty(httpHeaders.getHeaderString("tokens"))){
-				 throw new  GeneralException(messageProvider.codigoErrorIdf3, MessageFormat.format(messageProvider.mensajeErrorIdf3,"3"));
-			 }
-			 if(isNullOrEmpty(httpHeaders.getHeaderString("terminal"))){
-				 throw new  GeneralException(messageProvider.codigoErrorIdf3, MessageFormat.format(messageProvider.mensajeErrorIdf3,"4"));
-			 }
-			 
-			 response.getAuditRequest().setTransaccionId(httpHeaders.getHeaderString("transaccionId"));
-			 response.getAuditRequest().setAplicacion(httpHeaders.getHeaderString("aplicacion"));
-			 response.getAuditRequest().setUsuario(httpHeaders.getHeaderString("tokens"));
-			 response.getAuditRequest().setTerminal(httpHeaders.getHeaderString("terminal"));
-			 response.setObjectRequest(object);
+			response = new RequestGenericDto<>();
+			if (isNullOrEmpty(httpHeaders.getHeaderString("transaccionId"))) {
+				throw new GeneralException(messageProvider.codigoErrorIdf3,
+						MessageFormat.format(messageProvider.mensajeErrorIdf3, "1"));
+			}
+			if (isNullOrEmpty(httpHeaders.getHeaderString("aplicacion"))) {
+				throw new GeneralException(messageProvider.codigoErrorIdf3,
+						MessageFormat.format(messageProvider.mensajeErrorIdf3, "2"));
+			}
+			if (isNullOrEmpty(httpHeaders.getHeaderString("tokens"))) {
+				throw new GeneralException(messageProvider.codigoErrorIdf3,
+						MessageFormat.format(messageProvider.mensajeErrorIdf3, "3"));
+			}
+			if (isNullOrEmpty(httpHeaders.getHeaderString("terminal"))) {
+				throw new GeneralException(messageProvider.codigoErrorIdf3,
+						MessageFormat.format(messageProvider.mensajeErrorIdf3, "4"));
+			}
+			response.getAuditRequest().setAplicacion(httpHeaders.getHeaderString("aplicacion"));
+			response.getAuditRequest().setTerminal(httpHeaders.getHeaderString("terminal"));
+			response.getAuditRequest().setTransaccionId(httpHeaders.getHeaderString("transaccionId"));
+			response.getAuditRequest().setUsuario(httpHeaders.getHeaderString("usuario"));
+			response.getAuditRequest().setUsuarioId(Integer.parseInt(httpHeaders.getHeaderString("usuarioId")));
+			response.setObjectRequest(object);
+
 		 
 		 }catch(Exception e) {
 			 throw new GeneralException(messageProvider.codigoErrorIdt4,MessageFormat.format(messageProvider.mensajeErrorIdt3, clase, metodo, e.getStackTrace()[0].getLineNumber(),  e.getMessage()));
@@ -86,7 +91,6 @@ public class Utilitario {
 		metodo = Thread.currentThread().getStackTrace()[1].getMethodName();
 		AuditRequestDto response = null;
 		try {
-			 String tokenSession = "";
 			 
 			 response = new AuditRequestDto();
 			 if(isNullOrEmpty(httpHeaders.getHeaderString("transaccionId"))){
@@ -101,10 +105,11 @@ public class Utilitario {
 			 if(isNullOrEmpty(httpHeaders.getHeaderString("terminal"))){
 				 throw new  GeneralException(messageProvider.codigoErrorIdf3, MessageFormat.format(messageProvider.mensajeErrorIdf3,"4"));
 			 }
-
 			 response.setAplicacion(httpHeaders.getHeaderString("aplicacion"));
 			 response.setTerminal(httpHeaders.getHeaderString("terminal"));
-			 response.setTransaccionId(httpHeaders.getHeaderString("transaccionId")); 
+			 response.setTransaccionId(httpHeaders.getHeaderString("transaccionId"));
+			 response.setUsuario(httpHeaders.getHeaderString("usuario"));
+			 response.setUsuarioId(Integer.parseInt(httpHeaders.getHeaderString("usuarioId")));
 
 		}catch(GeneralException e) {
 			throw new GeneralException(e.getCodigo(), e.getMensaje());

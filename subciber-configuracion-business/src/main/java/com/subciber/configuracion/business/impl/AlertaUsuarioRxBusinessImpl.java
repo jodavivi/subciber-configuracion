@@ -74,6 +74,7 @@ public class AlertaUsuarioRxBusinessImpl implements AlertaUsuarioRxBusiness, Ser
 				nuevaAlerta.setDescripcion(alerta.getDescripcion());
 				nuevaAlerta.setId(alerta.getId());
 				nuevaAlerta.setPrioridad(alerta.getPrioridad());
+				nuevaAlerta.setCodigoPrioridad(alerta.getCodigoPrioridad());
 				if(alerta.getFechaCreacion() != null) {
 					DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 				    String formatDateTime = alerta.getFechaCreacion().format(formatter);
