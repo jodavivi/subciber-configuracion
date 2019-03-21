@@ -15,76 +15,83 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter("/*")
-public class CORSFilter extends HttpFilter{
-  
-   public CORSFilter() {
-       // TODO Auto-generated constructor stub
-   }
+@WebFilter("/rest/*")
+public class CORSFilter extends HttpFilter {
+	private static final long serialVersionUID = 1L;
 
-   /**
-    * @see Filter#destroy()
-    */
-   public void destroy() {
-       // TODO Auto-generated method stub
-   }
+	public CORSFilter() {
+		// TODO Auto-generated constructor stub
+	}
 
-   /**
-    * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-    */
-   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
-           throws IOException, ServletException {
+	/**
+	 * @see Filter#destroy()
+	 */
+	public void destroy() {
+		// TODO Auto-generated method stub
+	}
 
-       HttpServletRequest request = (HttpServletRequest) servletRequest;
-       String originUrl = request.getHeader("origin");
-       // Authorize (allow) all domains to consume the content
-       ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", buscarUrlPermitida(originUrl));
-       ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Methods","GET, OPTIONS, HEAD, PUT, POST");
-       ((HttpServletResponse) servletResponse).addHeader("Access-Control-Max-Age", "3600");
-       ((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Headers", "x-requested-with, X-Auth-Token, Content-Type, transaccionId, aplicacion, tokens, terminal");
-       ((HttpServletResponse) servletResponse).addHeader("Access-Control-Expose-Headers", "x-requested-with, X-Auth-Token, Content-Type, transaccionId, aplicacion, tokens, terminal, usuario, usuarioId");
+	/**
+	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
+	 */
+	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
+			throws IOException, ServletException {
 
-       HttpServletResponse resp = (HttpServletResponse) servletResponse;
+		HttpServletRequest request = (HttpServletRequest) servletRequest;
+		String originUrl = request.getHeader("origin");
+		String url = ((HttpServletRequest)request).getRequestURL().toString();
+		System.out.println(url);
+		// Authorize (allow) all domains to consume the content
+		((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Origin", buscarUrlPermitida(originUrl));
+		((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Methods",
+				"GET, OPTIONS, HEAD, PUT, POST");
+		((HttpServletResponse) servletResponse).addHeader("Access-Control-Max-Age", "3600");
+		((HttpServletResponse) servletResponse).addHeader("Access-Control-Allow-Headers",
+				"x-requested-with, X-Auth-Token, Content-Type, transaccionId, aplicacion, tokens, terminal");
+		((HttpServletResponse) servletResponse).addHeader("Access-Control-Expose-Headers",
+				"x-requested-with, X-Auth-Token, Content-Type, transaccionId, aplicacion, tokens, terminal, usuario, usuarioId");
 
-       // For HTTP OPTIONS verb/method reply with ACCEPTED status code -- per CORS handshake
-       if (request.getMethod().equals("OPTIONS")) {
-           resp.setStatus(HttpServletResponse.SC_ACCEPTED);
-           return;
-       }
+		HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
-       // pass the request along the filter chain
-       chain.doFilter(request, servletResponse);
-   }
+		// For HTTP OPTIONS verb/method reply with ACCEPTED status code -- per CORS
+		// handshake
+		if (request.getMethod().equals("OPTIONS")) {
+			resp.setStatus(HttpServletResponse.SC_ACCEPTED);
+			return;
+		}
 
-   /**
-    * @see Filter#init(FilterConfig)
-    */
-   public void init(FilterConfig fConfig) throws ServletException {
-       // TODO Auto-generated method stub
-   }
-   
-   public String buscarUrlPermitida(String url) {
-	   
-	   String urlDefault =  "http://localhost:8888";
-	   List<String> urlPermitidas = new ArrayList<>();
-       urlPermitidas.add("http://localhost:8888");
-       urlPermitidas.add("http://localhost:80");
-       urlPermitidas.add("http://localhost:8088");
-       urlPermitidas.add("http://localhost");
-       urlPermitidas.add("http://vivfcons.subciber.com");
-       
-       boolean permitida = false;       
-       for(String urlPermitida: urlPermitidas) {
-    	   if(urlPermitida.equalsIgnoreCase(url) ) {
-    		   permitida = true;
-    	   } 
-       }
-       
-       if(permitida) {
-    	   urlDefault = url;
-       }
-       
-	   return urlDefault;
-   }
+		// pass the request along the filter chain
+		chain.doFilter(request, servletResponse);
+	}
+
+	/**
+	 * @see Filter#init(FilterConfig)
+	 */
+	public void init(FilterConfig fConfig) throws ServletException {
+		// TODO Auto-generated method stub
+	}
+
+	public String buscarUrlPermitida(String url) {
+
+		String urlDefault = "http://localhost:8888";
+		List<String> urlPermitidas = new ArrayList<>();
+		urlPermitidas.add("http://localhost:8888");
+		urlPermitidas.add("http://localhost:80");
+		urlPermitidas.add("http://localhost:8088");
+		urlPermitidas.add("http://localhost");
+		urlPermitidas.add("http://vivfcons.subciber.com");
+
+		boolean permitida = false;
+		for (String urlPermitida : urlPermitidas) {
+			if (urlPermitida.equalsIgnoreCase(url)) {
+				permitida = true;
+			}
+		}
+
+		if (permitida) {
+			urlDefault = url;
+		}
+
+		return urlDefault;
+	}
 
 }

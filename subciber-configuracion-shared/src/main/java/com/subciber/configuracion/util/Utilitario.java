@@ -3,6 +3,7 @@
  */
 package com.subciber.configuracion.util;
 
+import java.math.BigInteger;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -11,6 +12,8 @@ import java.util.Random;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.UriInfo;
 
@@ -105,11 +108,11 @@ public class Utilitario {
 			 if(isNullOrEmpty(httpHeaders.getHeaderString("terminal"))){
 				 throw new  GeneralException(messageProvider.codigoErrorIdf3, MessageFormat.format(messageProvider.mensajeErrorIdf3,"4"));
 			 }
-			 response.setAplicacion(httpHeaders.getHeaderString("aplicacion"));
-			 response.setTerminal(httpHeaders.getHeaderString("terminal"));
-			 response.setTransaccionId(httpHeaders.getHeaderString("transaccionId"));
-			 response.setUsuario(httpHeaders.getHeaderString("usuario"));
-			 response.setUsuarioId(Integer.parseInt(httpHeaders.getHeaderString("usuarioId")));
+			 	response.setAplicacion(httpHeaders.getHeaderString("aplicacion"));
+				response.setTerminal(httpHeaders.getHeaderString("terminal"));
+				response.setTransaccionId(httpHeaders.getHeaderString("transaccionId"));
+				response.setUsuario(httpHeaders.getHeaderString("usuario"));
+				response.setUsuarioId(Integer.parseInt(httpHeaders.getHeaderString("usuarioId")));
 
 		}catch(GeneralException e) {
 			throw new GeneralException(e.getCodigo(), e.getMensaje());
@@ -178,5 +181,11 @@ public class Utilitario {
         String saltStr = salt.toString();
         return saltStr;
 
+    }
+	
+	public Integer generarSequenciaQuery(EntityManager entityManager, String sqlSecuencia) {
+		Query q = entityManager.createNativeQuery(sqlSecuencia);
+		BigInteger result=(BigInteger)q.getSingleResult();   
+		return result.intValue();
     }
 }

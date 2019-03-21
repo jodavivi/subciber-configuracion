@@ -39,6 +39,7 @@ import com.subciber.configuracion.util.Utilitario;
  * @version 0.1, 11/03/2019
  * @update
  */
+
 @Path("/maestra/tablas")
 public class TablaGenericaRestImpl implements TablaGenericaRest{
 
@@ -69,9 +70,6 @@ public class TablaGenericaRestImpl implements TablaGenericaRest{
 		ResponseGenericDto<TablaGenericaResponseDto> response = null;
 		RequestGenericDto<TablaGenericaFiltroDto> requestTabla = null;
 		try { 
-			
-			//System.out.println(uriInfo.getQueryParameters().getFirst("demo"));
-			//System.out.println(uriInfo.getPathParameters().getFirst("tabla"));
 			
 			TablaGenericaFiltroDto requestInput = new TablaGenericaFiltroDto();
 			response = new ResponseGenericDto<TablaGenericaResponseDto>();
@@ -106,7 +104,6 @@ public class TablaGenericaRestImpl implements TablaGenericaRest{
 		RequestGenericDto<TablaGenericaFiltroDto> requestTabla = null;
 		try { 
 			TablaGenericaFiltroDto requestInput = new TablaGenericaFiltroDto();
-			System.out.println(uriInfo.getPathParameters().getFirst("tabla"));
 			requestInput.setTablaCodigo(uriInfo.getPathParameters().getFirst("tabla"));
 			response = new ResponseGenericDto<TablaGenericaResponseDto>();
 			requestTabla = utilitario.generateRequest(requestInput, httpHeaders, uriInfo);
@@ -131,7 +128,7 @@ public class TablaGenericaRestImpl implements TablaGenericaRest{
 	}
 	
 	@POST
-	@Path("/tabla")
+	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON+ ";charset=utf-8")	
 	@Override
 	public Response registrarTablaGenerica(TablaGenericaDto request) {
@@ -162,7 +159,7 @@ public class TablaGenericaRestImpl implements TablaGenericaRest{
 	}
 
 	@PUT
-	@Path("/tabla")
+	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON+ ";charset=utf-8")	
 	@Override
 	public Response actualizarTablaGenerica(TablaGenericaDto request) {
@@ -191,7 +188,7 @@ public class TablaGenericaRestImpl implements TablaGenericaRest{
 	}
 
 	@DELETE
-	@Path("/tabla")
+	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON+ ";charset=utf-8")	
 	@Override
 	public Response eliminarTablaGenerica(RequestDeleteObjectDto request) {

@@ -53,7 +53,7 @@ public class CampoGenericaTxDaoImpl  extends BaseJPADao<Generica>  implements Ca
 			campo.setFechaCreacion(LocalDateTime.now());
 			campo.setTerminalCreacion(request.getAuditRequest().getTerminal());
 			campo.setAplicacionId(1);
-			campo.setEstadoId(request.getObjectRequest().getEstadoId());
+			campo.setEstadoId(ConstantesConfig.activo);
 			campo.setCampo(request.getObjectRequest().getCampo());
 			campo.setCodigoIntegracion(request.getObjectRequest().getCodigoIntegracion());
 			campo.setCodigoTabla(request.getObjectRequest().getCodigoTabla());

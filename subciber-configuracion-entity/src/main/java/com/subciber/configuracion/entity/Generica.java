@@ -51,7 +51,7 @@ public class Generica implements Serializable {
 	private String terminalModificador;
 	
 	@Column(name="\"TransaccionId\"")
-	private String transaccionId = "";;
+	private String transaccionId = "";
 	
 	@Column(name="\"AplicacionId\"")
 	private Integer aplicacionId;

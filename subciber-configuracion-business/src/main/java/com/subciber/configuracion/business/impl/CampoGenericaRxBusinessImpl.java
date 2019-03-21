@@ -70,6 +70,7 @@ public class CampoGenericaRxBusinessImpl implements CampoGenericaRxBusiness, Ser
 				dto.setDescripcionCampo2(list.getDescripcionCampo2());
 				dto.setEstado(list.getEstado());
 				dto.setId(list.getId());
+				dto.setEstadoId(list.getEstadoId());
 				dto.setOrden(list.getOrden());
 				dto.setPadreId(list.getPadreId());
 				

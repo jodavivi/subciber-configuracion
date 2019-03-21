@@ -24,6 +24,13 @@ public interface CampoGenericaRest {
 	public abstract Response consultarCampoGenerica();
 	
 	/**
+	 * @param metodo para mostrar el detalle del campo de tabla generica
+	 * @return devuelve Response
+	 * @throws 
+	 */
+	public abstract Response consultarDetalleCampoGenerica();
+	
+	/**
 	 * @param metodo para registrar los campos de la tabla generica
 	 * @return devuelve Response
 	 * @throws 
