@@ -5,8 +5,6 @@ package com.subciber.configuracion.business.impl;
 
 import java.io.Serializable;
 import java.text.MessageFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.ejb.EJB;
 import javax.enterprise.context.Dependent;
@@ -76,9 +74,7 @@ public class NotificacionTxBusinessImpl implements NotificacionTxBusiness , Seri
 			NotificacionDto notificacionDto = new NotificacionDto();
 			notificacionDto.setDescripcion(request.getObjectRequest().getDescripcion());
 			notificacionDto.setEmisionEstado("P");
-			
-			DateTimeFormatter formatterFechaEmision= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-			notificacionDto.setEmisionFecha(LocalDateTime.parse(request.getObjectRequest().getEmisionFecha(), formatterFechaEmision));
+			notificacionDto.setEmisionFecha(request.getObjectRequest().getEmisionFecha());
 			notificacionDto.setEstadoId(ConstantesConfig.activo);
 			notificacionDto.setPrioridadId(request.getObjectRequest().getPrioridadId());
 			notificacionDto.setTitulo(request.getObjectRequest().getTitulo());
@@ -159,8 +155,7 @@ public class NotificacionTxBusinessImpl implements NotificacionTxBusiness , Seri
 			NotificacionDto notificacionDto = new NotificacionDto();
 			notificacionDto.setId(request.getObjectRequest().getId());
 			notificacionDto.setDescripcion(request.getObjectRequest().getDescripcion());
-			DateTimeFormatter formatterFechaEmision= DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-			notificacionDto.setEmisionFecha(LocalDateTime.parse(request.getObjectRequest().getEmisionFecha(), formatterFechaEmision));
+			notificacionDto.setEmisionFecha(request.getObjectRequest().getEmisionFecha());
 			notificacionDto.setEstadoId(request.getObjectRequest().getEstadoId());
 			notificacionDto.setPrioridadId(request.getObjectRequest().getPrioridadId());
 			notificacionDto.setTitulo(request.getObjectRequest().getTitulo());
@@ -185,16 +180,9 @@ public class NotificacionTxBusinessImpl implements NotificacionTxBusiness , Seri
 					notificacionUsuarioDto.setNotificacionId(request.getObjectRequest().getId());
 					
 					//obtenemos la lista de usuarios
-					StringBuilder usuarios = new StringBuilder();
-					for(NotificacionDetalleDto item : request.getObjectRequest().getItemsNotificaciones()){
-						for(String user : item.getUsuarios()) {
-							usuarios.append(user);
-							usuarios.append("|");
-						}
-					}
 					String users = "";
-					if(usuarios.toString() != null && usuarios.toString().length() > 0) {
-						users = usuarios.toString().substring(usuarios.toString().length()-1);
+					for(NotificacionDetalleDto item : request.getObjectRequest().getItemsNotificaciones()){
+						users = String.join("|", item.getUsuarios());
 					}
 					
 					notificacionUsuarioDto.setUsuarios(users); 
@@ -216,17 +204,11 @@ public class NotificacionTxBusinessImpl implements NotificacionTxBusiness , Seri
 					notificacionUsuarioDto.setEstadoId(ConstantesConfig.activo);
 					
 					//obtenemos la lista de usuarios
-					StringBuilder usuarios = new StringBuilder();
-					for(NotificacionDetalleDto item : request.getObjectRequest().getItemsNotificaciones()){
-						for(String user : item.getUsuarios()) {
-							usuarios.append(user);
-							usuarios.append("|");
-						}
-					}
 					String users = "";
-					if(usuarios.toString() != null && usuarios.toString().length() > 0) {
-						users = usuarios.toString().substring(usuarios.toString().length()-1);
+					for(NotificacionDetalleDto item : request.getObjectRequest().getItemsNotificaciones()){
+						users = String.join("|", item.getUsuarios());
 					}
+					 
 					notificacionUsuarioDto.setUsuarios(users); 
 					inputNotificacionUsuario.setObjectRequest(notificacionUsuarioDto);
 					AuditResponseDto actualizarNotificacionUsuarioResponse =  notificacionUsuarioTxDao.actualizarNotificacionUsuario(inputNotificacionUsuario);

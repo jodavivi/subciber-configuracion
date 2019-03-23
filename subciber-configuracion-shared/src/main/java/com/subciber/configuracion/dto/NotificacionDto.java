@@ -4,7 +4,6 @@
 package com.subciber.configuracion.dto;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * @author josep
@@ -22,7 +21,7 @@ public class NotificacionDto implements Serializable{
 	private String titulo;
 	private String descripcion;
 	private String emisionEstado;
-	private LocalDateTime emisionFecha;
+	private String emisionFecha;
 	public Integer getId() {
 		return id;
 	}
@@ -71,10 +70,10 @@ public class NotificacionDto implements Serializable{
 	public void setEmisionEstado(String emisionEstado) {
 		this.emisionEstado = emisionEstado;
 	}
-	public LocalDateTime getEmisionFecha() {
+	public String getEmisionFecha() {
 		return emisionFecha;
 	}
-	public void setEmisionFecha(LocalDateTime emisionFecha) {
+	public void setEmisionFecha(String emisionFecha) {
 		this.emisionFecha = emisionFecha;
 	}
 	

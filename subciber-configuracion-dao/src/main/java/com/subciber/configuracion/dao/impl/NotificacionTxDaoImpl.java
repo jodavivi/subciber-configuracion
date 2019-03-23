@@ -63,7 +63,7 @@ public class NotificacionTxDaoImpl extends BaseJPADao<Notificacion> implements N
 			tabla.setTerminalCreacion(request.getAuditRequest().getTerminal());
 			tabla.setDescripcion(request.getObjectRequest().getDescripcion());
 			tabla.setEmisionEstado(request.getObjectRequest().getEmisionEstado());
-			tabla.setEmisionFecha(request.getObjectRequest().getEmisionFecha());
+			tabla.setEmisionFecha(utilitario.stringTofecha(request.getObjectRequest().getEmisionFecha()));
 			tabla.setEstadoId(request.getObjectRequest().getEstadoId());
 			tabla.setPrioridadId(request.getObjectRequest().getPrioridadId());
 			tabla.setTitulo(request.getObjectRequest().getTitulo());
@@ -123,7 +123,7 @@ public class NotificacionTxDaoImpl extends BaseJPADao<Notificacion> implements N
 				tabla.setEmisionEstado(request.getObjectRequest().getEmisionEstado());
 			}
 			if(request.getObjectRequest().getEmisionFecha()!=null) {
-				tabla.setEmisionFecha(request.getObjectRequest().getEmisionFecha());
+				tabla.setEmisionFecha(utilitario.stringTofecha(request.getObjectRequest().getEmisionFecha()));
 			}
 			if(request.getObjectRequest().getEstadoId()!=null) {
 				tabla.setEstadoId(request.getObjectRequest().getEstadoId());

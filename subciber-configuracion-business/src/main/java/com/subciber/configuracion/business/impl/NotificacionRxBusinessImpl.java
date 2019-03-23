@@ -22,6 +22,7 @@ import com.subciber.configuracion.entity.VNotificacion;
 import com.subciber.configuracion.exception.BusinessException;
 import com.subciber.configuracion.exception.DaoException;
 import com.subciber.configuracion.property.MessageProvider;
+import com.subciber.configuracion.util.Utilitario;
 
 /**
  * @description implementacion de la interface AlertaUsuarioRxBusiness
@@ -40,7 +41,8 @@ public class NotificacionRxBusinessImpl implements NotificacionRxBusiness, Seria
     private MessageProvider messageProvider;
 	@EJB
 	private NotificacionRxDao notificacionRxDao;
-	
+	@Inject
+    private Utilitario utilitario;
 	
 	/**
 	 * {@inheritDoc}
@@ -68,7 +70,7 @@ public class NotificacionRxBusinessImpl implements NotificacionRxBusiness, Seria
 				NotificacionDto nuevaNotificacion = new NotificacionDto();
 				nuevaNotificacion.setDescripcion(items.getDescripcion());
 				nuevaNotificacion.setEmisionEstado(items.getEmisionEstado());
-				nuevaNotificacion.setEmisionFecha(items.getEmisionFecha());
+				nuevaNotificacion.setEmisionFecha(utilitario.fechaToString(items.getEmisionFecha()));
 				nuevaNotificacion.setEstado(items.getEstado());
 				nuevaNotificacion.setEstadoId(items.getEstadoId());
 				nuevaNotificacion.setId(items.getId());

@@ -25,6 +25,7 @@ import com.subciber.configuracion.entity.VNotificacionDetalle;
 import com.subciber.configuracion.exception.BusinessException;
 import com.subciber.configuracion.exception.DaoException;
 import com.subciber.configuracion.property.MessageProvider;
+import com.subciber.configuracion.util.Utilitario;
 
 /**
  * @description implementacion de la interface AlertaUsuarioRxBusiness
@@ -41,6 +42,8 @@ public class NotificacionDetalleRxBusinessImpl implements NotificacionDetalleRxB
 	
 	@Inject
     private MessageProvider messageProvider;
+	@Inject
+    private Utilitario utilitario;
 	@EJB
 	private NotificacionRxDao notificacionRxDao;
 	@EJB
@@ -72,7 +75,7 @@ public class NotificacionDetalleRxBusinessImpl implements NotificacionDetalleRxB
 				NotificacionDetalleResponseDto  detalle = new NotificacionDetalleResponseDto();
 				detalle.setDescripcion(items.getDescripcion());
 				detalle.setEmisionEstado(items.getEmisionEstado());
-				detalle.setEmisionFecha(items.getEmisionFecha());
+				detalle.setEmisionFecha(utilitario.fechaToString(items.getEmisionFecha()));
 				detalle.setEstado(items.getEstado());
 				detalle.setEstadoId(items.getEstadoId());
 				detalle.setId(items.getId());
@@ -87,20 +90,18 @@ public class NotificacionDetalleRxBusinessImpl implements NotificacionDetalleRxB
 			filtroDetalle.setNotificacionId(request.getObjectRequest().getNotificacionId());
 			List<VNotificacionDetalle> consultarNotificacionesDetalleResponse = notificacionDetalleRxDao.consultarNotificacionesDetalle(filtroDetalle);
 			
-			if(consultarNotificacionesDetalleResponse == null || consultarNotificacionesDetalleResponse.size() == 0) {
-				throw new  DaoException(messageProvider.codigoErrorIdf2, MessageFormat.format(messageProvider.mensajeErrorIdf2,"Detalle Notificacion"));
-			}
-			
-			for(VNotificacionDetalle items : consultarNotificacionesDetalleResponse) {
-				
-				NotificacionDetalleDto detalle = new NotificacionDetalleDto();
-				detalle.setAlertaTipo(items.getAlertaTipo());
-				detalle.setAlertaTipoId(items.getAlertaTipoId());
-				String[] parts = items.getUsuarios().split("\\|");
-				for(String usuario : parts) {
-					detalle.getUsuarios().add(usuario);
+			if(consultarNotificacionesDetalleResponse != null && consultarNotificacionesDetalleResponse.size() > 0) {
+				for(VNotificacionDetalle items : consultarNotificacionesDetalleResponse) {
+					NotificacionDetalleDto detalle = new NotificacionDetalleDto();
+					detalle.setId(items.getId());
+					detalle.setAlertaTipo(items.getAlertaTipo());
+					detalle.setAlertaTipoId(items.getAlertaTipoId());
+					String[] parts = items.getUsuarios().split("\\|");
+					for(String usuario : parts) {
+						detalle.getUsuarios().add(usuario);
+					}
+					respuesta.getObjectResponse().getItemDetalle().add(detalle);
 				}
-				respuesta.getObjectResponse().getItemDetalle().add(detalle);
 			}
 			
 			respuesta.getAuditResponse().setCodigoRespuesta(messageProvider.codigoExito);

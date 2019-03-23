@@ -5,6 +5,8 @@ package com.subciber.configuracion.util;
 
 import java.math.BigInteger;
 import java.text.MessageFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -188,4 +190,22 @@ public class Utilitario {
 		BigInteger result=(BigInteger)q.getSingleResult();   
 		return result.intValue();
     }
+	
+	public String fechaToString(LocalDateTime request) {
+		String fecha = "";
+		if(request != null) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			fecha = request.format(formatter);
+		}
+		return fecha;
+	}
+	
+	public LocalDateTime stringTofecha(String request) {
+		LocalDateTime fecha = null;
+		if(request != null) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+			fecha = LocalDateTime.parse(request, formatter);
+		}
+		return fecha;
+	}
 }
