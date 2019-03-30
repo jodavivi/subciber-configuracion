@@ -51,7 +51,7 @@ public class CORSFilter extends HttpFilter {
 				"x-requested-with, X-Auth-Token, Content-Type, transaccionId, aplicacion, tokens, terminal, usuario, usuarioId");
 
 		HttpServletResponse resp = (HttpServletResponse) servletResponse;
-
+		resp.setCharacterEncoding("utf-8");
 		// For HTTP OPTIONS verb/method reply with ACCEPTED status code -- per CORS
 		// handshake
 		if (request.getMethod().equals("OPTIONS")) {
