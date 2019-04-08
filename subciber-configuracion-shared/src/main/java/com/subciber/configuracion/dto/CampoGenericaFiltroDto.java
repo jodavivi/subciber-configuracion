@@ -8,6 +8,7 @@ public class CampoGenericaFiltroDto implements Serializable{
 	private String codigoTabla;
 	private Integer campoId;
 	private Integer estadoId;
+	private Integer notId;
 	
 	public String getCodigoTabla() {
 		return codigoTabla;
@@ -26,6 +27,12 @@ public class CampoGenericaFiltroDto implements Serializable{
 	}
 	public void setCampoId(Integer campoId) {
 		this.campoId = campoId;
+	}
+	public Integer getNotId() {
+		return notId;
+	}
+	public void setNotId(Integer notId) {
+		this.notId = notId;
 	}
 	
 }

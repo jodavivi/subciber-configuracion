@@ -31,6 +31,7 @@ import com.subciber.configuracion.dto.ResponseGenericDto;
 import com.subciber.configuracion.exception.GeneralException;
 import com.subciber.configuracion.property.MessageProvider;
 import com.subciber.configuracion.rest.api.CampoGenericaRest;
+import com.subciber.configuracion.util.ConstantesConfig;
 import com.subciber.configuracion.util.Utilitario;
 
 /**
@@ -213,6 +214,39 @@ public class CampoGenericaRestImpl implements CampoGenericaRest{
 		} catch (Exception e) {
 			response.setCodigoRespuesta(messageProvider.codigoErrorIdt3);
 			response.setMensajeRespuesta(MessageFormat.format(messageProvider.mensajeErrorIdt3,
+					clase, metodo, e.getStackTrace()[0].getLineNumber(), e.getMessage()));
+		}
+
+		return Response.status(200).entity(response).build();
+	}
+
+	@GET
+	@Path("/campos")
+	@Produces(MediaType.APPLICATION_JSON+ ";charset=utf-8")	
+	@Override
+	public Response listarCamposGenerica() {
+		ResponseGenericDto<CampoGenericaResponseDto> response = null;
+		RequestGenericDto<CampoGenericaFiltroDto> requestTabla = null;
+		try {
+			CampoGenericaFiltroDto requestInpput = new CampoGenericaFiltroDto();
+			requestInpput.setNotId(ConstantesConfig.desactivo);
+			response = new ResponseGenericDto<CampoGenericaResponseDto>();
+			requestTabla = utilitario.generateRequest(requestInpput, httpHeaders, uriInfo);
+			response.getAuditResponse().setTransaccionId(requestTabla.getAuditRequest().getTransaccionId());
+			response = campoGenericaRxBusiness.consultarCampoGenerica(requestTabla);
+
+			if (response.getAuditResponse().getCodigoRespuesta() != messageProvider.codigoExito) {
+				response.getAuditResponse()
+						.setCodigoRespuesta(response.getAuditResponse().getCodigoRespuesta());
+				response.getAuditResponse()
+						.setMensajeRespuesta(response.getAuditResponse().getMensajeRespuesta());
+			}
+		} catch (GeneralException e) {
+			response.getAuditResponse().setCodigoRespuesta(e.getCodigo());
+			response.getAuditResponse().setMensajeRespuesta(e.getMensaje());
+		} catch (Exception e) {
+			response.getAuditResponse().setCodigoRespuesta(messageProvider.codigoErrorIdt3);
+			response.getAuditResponse().setMensajeRespuesta(MessageFormat.format(messageProvider.mensajeErrorIdt3,
 					clase, metodo, e.getStackTrace()[0].getLineNumber(), e.getMessage()));
 		}
 

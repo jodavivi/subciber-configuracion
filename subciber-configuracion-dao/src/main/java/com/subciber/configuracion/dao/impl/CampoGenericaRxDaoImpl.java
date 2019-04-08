@@ -63,6 +63,10 @@ public class CampoGenericaRxDaoImpl  extends BaseJPADao<VCampoGenerica> implemen
 			if(request.getCampoId() != null) {
 				jpqlWhere.append("and c.id = :campoId ");
 			}
+			
+			if(request.getNotId() != null) {
+				jpqlWhere.append("and c.estadoId <> :notId ");
+			}
 
 			jpql = new StringBuilder();
 			jpql.append(jpqlSelect);
@@ -78,7 +82,10 @@ public class CampoGenericaRxDaoImpl  extends BaseJPADao<VCampoGenerica> implemen
 			if(request.getCampoId() != null) {
 				query.setParameter("campoId", request.getCampoId()); 
 			}
- 
+			if(request.getNotId() != null) {
+				query.setParameter("notId", request.getNotId()); 
+			}
+			
 			resultado = query.getResultList();
 			
 		}catch (NoResultException e){

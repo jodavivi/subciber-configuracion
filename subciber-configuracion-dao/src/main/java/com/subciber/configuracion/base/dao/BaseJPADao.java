@@ -15,7 +15,7 @@ import com.subciber.configuracion.dao.util.ConfigDao;
 
 /**
  * @author josep
- *s
+ *
  */
 @Dependent
 public abstract class BaseJPADao<T> implements Serializable {
