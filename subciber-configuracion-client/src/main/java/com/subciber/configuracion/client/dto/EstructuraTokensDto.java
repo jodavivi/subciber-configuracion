@@ -9,6 +9,7 @@ import java.io.Serializable;
  * @author josep
  *
  */
+
 public class EstructuraTokensDto implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -22,6 +23,7 @@ public class EstructuraTokensDto implements Serializable{
 	private String fechaCreacion;
 	private String fechaExpiracion;
 	private String codigodeaccesos;
+	private String rol;
 	
 	public String getTokens() {
 		return tokens;
@@ -77,11 +79,10 @@ public class EstructuraTokensDto implements Serializable{
 	public void setNuevoTokens(String nuevoTokens) {
 		this.nuevoTokens = nuevoTokens;
 	}
-	@Override
-	public String toString() {
-		return "EstructuraTokensDto [tokens=" + tokens + ", nuevoTokens=" + nuevoTokens + ", session=" + session
-				+ ", usuarioId=" + usuarioId + ", usuario=" + usuario + ", email=" + email + ", fechaCreacion="
-				+ fechaCreacion + ", fechaExpiracion=" + fechaExpiracion + ", codigodeaccesos=" + codigodeaccesos + "]";
+	public String getRol() {
+		return rol;
 	}
-	
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
 }

@@ -37,7 +37,6 @@ public class TokenClientImpl implements TokenClient {
 			headers.add("tokens", request.getObjectRequest().getTokens());
 			String url = ConfigUrlClient.urlValidarTokens;
 			Response response = client.target(url).request(MediaType.APPLICATION_JSON).headers(headers).post(Entity.entity(request.getObjectRequest(), MediaType.APPLICATION_JSON));
-
 			ResponseValidarTokens respuestaValidaTokens = response.readEntity(ResponseValidarTokens.class); 
 			respuesta.getAuditResponse().setCodigoRespuesta(respuestaValidaTokens.getAuditResponse().getCodigoRespuesta());
 			respuesta.getAuditResponse().setMensajeRespuesta(respuestaValidaTokens.getAuditResponse().getMensajeRespuesta());
