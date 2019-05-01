@@ -80,7 +80,12 @@ public class Utilitario {
 			response.getAuditRequest().setTerminal(httpHeaders.getHeaderString("terminal"));
 			response.getAuditRequest().setTransaccionId(httpHeaders.getHeaderString("transaccionId"));
 			response.getAuditRequest().setUsuario(httpHeaders.getHeaderString("usuario"));
-			response.getAuditRequest().setUsuarioId(Integer.parseInt(httpHeaders.getHeaderString("usuarioId")));
+			try {
+				response.getAuditRequest().setUsuarioId(Integer.parseInt(httpHeaders.getHeaderString("usuarioId")));
+			}catch(Exception e) {
+				response.getAuditRequest().setUsuarioId(0);
+			}
+			
 			response.setObjectRequest(object);
 
 		 
