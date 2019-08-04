@@ -29,7 +29,7 @@ public class FilterRequestService implements ContainerRequestFilter {
     private MessageProvider messageProvider;
 	
 	private static final Set<String> ALLOWED_PATHS = Collections.unmodifiableSet(new HashSet<>(
-	        Arrays.asList("", "/maestra/tablas/campos")));
+	        Arrays.asList("", "/maestra/tablas/campos",  "/enviocorreo/general")));
 	
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {

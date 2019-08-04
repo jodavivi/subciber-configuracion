@@ -23,9 +23,7 @@ public class Generica implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@SequenceGenerator(name = "seq_generica", schema="\"General\"", sequenceName = "\"Generica_Id_seq\"", allocationSize = 1)
-	@GeneratedValue(generator = "seq_generica")
+	@Id 
 	@Column(name="\"Id\"")
 	private Integer id;
 	

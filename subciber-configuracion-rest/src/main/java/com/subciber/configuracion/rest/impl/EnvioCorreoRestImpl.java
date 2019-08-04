@@ -81,4 +81,32 @@ public class EnvioCorreoRestImpl implements EnvioCorreoRest {
 		return Response.status(200).entity(response).build();
 	}
 
+	@POST
+	@Path("/general")
+	@Produces("application/json")
+	@Override
+	public Response enviarCorreoSinAutenticacion(EnvioCorreoDto request) {
+		AuditResponseDto response= new AuditResponseDto();
+		metodo = Thread.currentThread().getStackTrace()[1].getMethodName();
+		RequestGenericDto<EnvioCorreoDto> requestGenerarico = null;
+		try {
+			requestGenerarico = utilitario.generateRequest(request, httpHeaders, uriInfo);
+			response.setTransaccionId(requestGenerarico.getAuditRequest().getTransaccionId());
+			envioCorreoBusiness.enviarCorreo(requestGenerarico);
+			response.setCodigoRespuesta(messageProvider.codigoExito);
+			response.setMensajeRespuesta(messageProvider.mensajeExito);
+		} catch (BusinessException e) {
+			response.setCodigoRespuesta(e.getCodigo());
+			response.setMensajeRespuesta(e.getMensaje());
+		} catch (GeneralException e) {
+			response.setCodigoRespuesta(e.getCodigo());
+			response.setMensajeRespuesta(e.getMensaje());
+		} catch (Exception e) {
+			response.setCodigoRespuesta(messageProvider.codigoErrorIdt3);
+			response.setMensajeRespuesta(MessageFormat.format(messageProvider.mensajeErrorIdt3,
+					clase, metodo, e.getStackTrace()[0].getLineNumber(), e.getMessage()));
+		} 
+		return Response.status(200).entity(response).build();
+	}
+
 }

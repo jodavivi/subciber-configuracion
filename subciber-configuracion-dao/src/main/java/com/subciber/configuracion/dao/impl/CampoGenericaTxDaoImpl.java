@@ -11,9 +11,10 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 
-import com.subciber.configuracion.base.dao.BaseJPADao;
+import com.subciber.configuracion.base.dao.GenericaJPADaoImpl;
 import com.subciber.configuracion.base.dto.AuditResponseDto;
 import com.subciber.configuracion.dao.api.CampoGenericaTxDao;
+import com.subciber.configuracion.dao.util.ConfigDao;
 import com.subciber.configuracion.dto.CampoGenericaDto;
 import com.subciber.configuracion.dto.RequestGenericDto;
 import com.subciber.configuracion.dto.ResponseGenericDto;
@@ -29,7 +30,7 @@ import com.subciber.configuracion.util.ConstantesConfig;
  * 
  */
 @Stateless
-public class CampoGenericaTxDaoImpl  extends BaseJPADao<Generica>  implements CampoGenericaTxDao {
+public class CampoGenericaTxDaoImpl  extends GenericaJPADaoImpl<Generica>  implements CampoGenericaTxDao {
 	
 	private static final long serialVersionUID = 1L;
 	@Inject
@@ -48,12 +49,15 @@ public class CampoGenericaTxDaoImpl  extends BaseJPADao<Generica>  implements Ca
 		try {
 			response = new ResponseGenericDto<Integer>();
 			response.getAuditResponse().setTransaccionId(request.getAuditRequest().getTerminal());
+			Integer id = obtenerId(ConfigDao.sequenceGenerica);
+			
 			Generica campo = new Generica();
+			campo.setId(id);
 			campo.setUsuarioCreador(request.getAuditRequest().getUsuario());
 			campo.setFechaCreacion(LocalDateTime.now());
 			campo.setTerminalCreacion(request.getAuditRequest().getTerminal());
 			campo.setAplicacionId(1);
-			campo.setEstadoId(ConstantesConfig.activo);
+			campo.setEstadoId(request.getObjectRequest().getEstadoId());
 			campo.setCampo(request.getObjectRequest().getCampo());
 			campo.setCodigoIntegracion(request.getObjectRequest().getCodigoIntegracion());
 			campo.setCodigoTabla(request.getObjectRequest().getCodigoTabla());
@@ -66,7 +70,7 @@ public class CampoGenericaTxDaoImpl  extends BaseJPADao<Generica>  implements Ca
 			metodo = Thread.currentThread().getStackTrace()[1].getMethodName();
 			entityManager.merge(campo);
 			entityManager.flush();
-			response.setObjectResponse(campo.getId());
+			response.setObjectResponse(id);
 			response.getAuditResponse().setCodigoRespuesta(messageProvider.codigoExito);
 			response.getAuditResponse().setMensajeRespuesta(messageProvider.mensajeExito);
 			

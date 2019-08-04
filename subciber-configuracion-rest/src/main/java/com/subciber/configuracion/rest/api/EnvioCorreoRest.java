@@ -21,4 +21,11 @@ public interface EnvioCorreoRest {
 	 */
 	public abstract Response enviarCorreo(EnvioCorreoDto request);
 	
+	/**
+	 * @param metodo para enviar correo sin Autenticacion
+	 * @return devuelve AuditResponseDto
+	 * @throws 
+	 */
+	public abstract Response enviarCorreoSinAutenticacion(EnvioCorreoDto request);
+	
 }

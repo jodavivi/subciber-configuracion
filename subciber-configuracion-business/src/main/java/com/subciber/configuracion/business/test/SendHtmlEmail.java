@@ -32,7 +32,7 @@ public class SendHtmlEmail {
 		StrSubstitutor strSub = null;
 		try {
 			html   = SendHtmlEmail.fileToString(SendHtmlEmail.class.getResourceAsStream("/CrearUsuario.html"), "utf-8");
-			System.out.println(html.toString());
+			//System.out.println(html.toString());
 			String mensaje = html.toString();
 				EnvioCorreoDto req = new EnvioCorreoDto();
 				req.setAsunto("Prueba");
@@ -47,7 +47,7 @@ public class SendHtmlEmail {
 				request.setObjectRequest(correoDto);
 				correo.enviarCorreo(request);
 		}catch(BusinessException b) {
-			
+			b.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -3,10 +3,12 @@
  */
 package com.subciber.configuracion.base.dao;
 
+import java.math.BigInteger;
 import java.text.MessageFormat;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import javax.persistence.Query;
 
 import com.subciber.configuracion.exception.DaoException;
 import com.subciber.configuracion.property.MessageProvider;
@@ -36,6 +38,24 @@ public abstract  class GenericaJPADaoImpl<T> extends BaseJPADao<T>  implements G
 			throw new DaoException(messageProvider.codigoErrorIdt1, MessageFormat.format(messageProvider.mensajeErrorIdt1, clase, metodo, e.getStackTrace()[0].getLineNumber(), tableName, e.getMessage()));
 		}
 	     return o; 
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public Integer obtenerId(String sqlSecuencia) throws DaoException{
+
+		Integer response  = null;
+		try {
+			metodo = Thread.currentThread().getStackTrace()[1].getMethodName();
+			Query q = entityManager.createNativeQuery(sqlSecuencia);
+			BigInteger result=(BigInteger)q.getSingleResult();   
+			response = result.intValue();
+		}catch(Exception e) {
+			throw new DaoException(messageProvider.codigoErrorIdt1, MessageFormat.format(messageProvider.mensajeErrorIdt1, clase, metodo, e.getStackTrace()[0].getLineNumber(), tableName, e.getMessage()));
+		}
+		
+		return response;
 	}
 
 }

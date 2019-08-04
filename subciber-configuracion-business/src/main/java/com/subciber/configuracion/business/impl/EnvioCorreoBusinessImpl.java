@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.subciber.configuracion.business.impl;
 
 import java.io.Serializable;

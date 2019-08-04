@@ -66,6 +66,7 @@ public class CampoGenericaTxBusinessImpl implements CampoGenericaTxBusiness , Se
 			if(registrarCampoGenericaResponse.getAuditResponse().getCodigoRespuesta() != messageProvider.codigoExito) {
 				throw new DaoException(registrarCampoGenericaResponse.getAuditResponse().getCodigoRespuesta(), registrarCampoGenericaResponse.getAuditResponse().getMensajeRespuesta());
 			}
+			response.setObjectResponse(registrarCampoGenericaResponse.getObjectResponse());
 			response.getAuditResponse().setCodigoRespuesta(messageProvider.codigoExito);
 			response.getAuditResponse().setMensajeRespuesta(messageProvider.mensajeExito);
 		}catch (DaoException e) {
