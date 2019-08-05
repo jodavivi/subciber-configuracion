@@ -180,6 +180,7 @@ public class CampoGenericaTxDaoImpl  extends GenericaJPADaoImpl<Generica>  imple
 			campo.setUsuarioModificador(request.getAuditRequest().getUsuario());
 			campo.setFechaModificacion(LocalDateTime.now());
 			campo.setTerminalModificador(request.getAuditRequest().getTerminal());
+			campo.setTransaccionId(request.getAuditRequest().getTransaccionId());
 			campo.setEstadoId(ConstantesConfig.eliminado);
 			metodo = Thread.currentThread().getStackTrace()[1].getMethodName();
 			entityManager.persist(campo);
