@@ -3,6 +3,7 @@ package com.subciber.configuracion.dao.api;
 import javax.ejb.Local;
 
 import com.subciber.configuracion.base.dto.AuditResponseDto;
+import com.subciber.configuracion.dto.AlertasUsuarioDto;
 import com.subciber.configuracion.dto.RequestGenericDto;
 import com.subciber.configuracion.exception.DaoException;
 
@@ -15,6 +16,13 @@ import com.subciber.configuracion.exception.DaoException;
 @Local
 public interface AlertaUsuarioTxDao {
 
+	/**
+	 * @param metodo para crear un alerta de usuario del sistema
+	 * @return 
+	 * @throws DaoException
+	 */
+	public abstract AuditResponseDto registrarAlertaUsuario(RequestGenericDto<AlertasUsuarioDto> request) throws DaoException;
+	
 	/**
 	 * @param metodo para eliminar el mensaje de alerta
 	 * @return 

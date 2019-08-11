@@ -16,8 +16,10 @@ import org.slf4j.LoggerFactory;
 import com.subciber.configuracion.base.dto.AuditResponseDto;
 import com.subciber.configuracion.business.api.AlertaUsuarioTxBusiness;
 import com.subciber.configuracion.dao.api.AlertaUsuarioTxDao;
+import com.subciber.configuracion.dto.AlertasUsuarioDto;
 import com.subciber.configuracion.dto.RequestDeleteObjectDto;
 import com.subciber.configuracion.dto.RequestGenericDto;
+import com.subciber.configuracion.dto.RequestRegistroAlertaSistemaDto;
 import com.subciber.configuracion.exception.BusinessException;
 import com.subciber.configuracion.exception.DaoException;
 import com.subciber.configuracion.property.MessageProvider;
@@ -33,7 +35,7 @@ import com.subciber.configuracion.util.JAXBUtil;
 public class AlertaUsuarioTxBusinessImpl implements AlertaUsuarioTxBusiness, Serializable {
 
 	private static final long serialVersionUID = 1L;
-	static final Logger logger = LoggerFactory.getLogger(TablaGenericaTxBusinessImpl.class);
+	static final Logger logger = LoggerFactory.getLogger(AlertaUsuarioTxBusinessImpl.class);
 	String clase = Thread.currentThread().getStackTrace()[1].getClassName();
 	String metodo = null;
 	long timeStart = 0;
@@ -43,6 +45,61 @@ public class AlertaUsuarioTxBusinessImpl implements AlertaUsuarioTxBusiness, Ser
     private MessageProvider messageProvider;
 	@EJB
 	private AlertaUsuarioTxDao alertaUsuarioTxDao; 
+	
+	@Override
+	public AuditResponseDto registrarAlertaUsuario(RequestGenericDto<RequestRegistroAlertaSistemaDto> request)
+			throws BusinessException {
+		
+		AuditResponseDto response = null;
+
+		try {
+			timeStart = System.currentTimeMillis();
+			transactionId = request.getAuditRequest().getTransaccionId();
+			metodo = Thread.currentThread().getStackTrace()[1].getMethodName();
+			logger.info(MessageFormat.format(messageProvider.logMensajeInicio, transactionId, metodo));
+			logger.info(MessageFormat.format(messageProvider.logMensajeInp, transactionId, metodo, JAXBUtil.log(request)));
+			response = new AuditResponseDto();
+			response.setTransaccionId(transactionId);		
+			
+			
+			for(Integer item : request.getObjectRequest().getUsuarioId()) {
+				RequestGenericDto<AlertasUsuarioDto> requestAlerta = new RequestGenericDto<AlertasUsuarioDto>();
+				requestAlerta.setAuditRequest(request.getAuditRequest());
+				AlertasUsuarioDto usuarioAlerta = new AlertasUsuarioDto();
+				usuarioAlerta.setAlertaTipoId(request.getObjectRequest().getAlertaTipoId());
+				usuarioAlerta.setDescripcion(request.getObjectRequest().getDescripcion());
+				usuarioAlerta.setEstadoId(request.getObjectRequest().getEstadoId());
+				usuarioAlerta.setEstadoRecibido(request.getObjectRequest().getEstadoRecibido());
+				usuarioAlerta.setPrioridadId(request.getObjectRequest().getPrioridadId());
+				usuarioAlerta.setTitulo(request.getObjectRequest().getTitulo());
+				usuarioAlerta.setUsuarioId(item);
+				requestAlerta.setObjectRequest(usuarioAlerta);
+				AuditResponseDto  registrarAlertaUsuarioResponse = alertaUsuarioTxDao.registrarAlertaUsuario(requestAlerta);
+				
+				if(registrarAlertaUsuarioResponse.getCodigoRespuesta() != messageProvider.codigoExito) {
+					throw new DaoException(registrarAlertaUsuarioResponse.getCodigoRespuesta(), registrarAlertaUsuarioResponse.getMensajeRespuesta());
+				}
+			}
+			
+			response.setCodigoRespuesta(messageProvider.codigoExito);
+			response.setMensajeRespuesta(messageProvider.mensajeExito);
+		}catch (DaoException e) {
+			logger.error(MessageFormat.format(messageProvider.logMensajeError, transactionId, metodo, e.getMessage()));
+			response.setCodigoRespuesta(e.getCodigo());
+			response.setMensajeRespuesta(e.getMensaje());
+		} catch (Exception e) {
+			logger.error(MessageFormat.format(messageProvider.logMensajeError, transactionId, metodo, e.getMessage()));
+			response.setCodigoRespuesta(messageProvider.codigoErrorIdt2);
+			response.setMensajeRespuesta(MessageFormat.format(messageProvider.mensajeErrorIdt2, clase, metodo, e.getStackTrace()[0].getLineNumber(),  e.getMessage()));		
+		} finally { 
+			logger.info(MessageFormat.format(messageProvider.logMensajeOut, transactionId, metodo, JAXBUtil.log(response)));
+			logger.info(MessageFormat.format(messageProvider.logMensajeTime, transactionId,	metodo, (System.currentTimeMillis() - timeStart)));
+			logger.info(MessageFormat.format(messageProvider.logMensajeEnd, transactionId, metodo));
+		}
+		
+		return response;
+	}
+	
 	
 	@Override
 	public AuditResponseDto eliminarAlertaUsuario(RequestGenericDto<RequestDeleteObjectDto> request)

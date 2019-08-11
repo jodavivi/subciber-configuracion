@@ -6,6 +6,7 @@ package com.subciber.configuracion.rest.api;
 import javax.ws.rs.core.Response;
 
 import com.subciber.configuracion.dto.RequestDeleteObjectDto;
+import com.subciber.configuracion.dto.RequestRegistroAlertaSistemaDto;
 
 /**
  * @description Interface para mostrar las alertas por usuario
@@ -21,6 +22,13 @@ public interface AlertaSistemaRest {
 	 * @throws 
 	 */
 	public abstract Response consultarAlertasSistema();
+	
+	/**
+	 * @param metodo para registrar las alertas por usuario
+	 * @return devuelve Response
+	 * @throws 
+	 */ 
+	public abstract Response registrarAlertasSistema(RequestRegistroAlertaSistemaDto request);
 	
 	/**
 	 * @param metodo para eliminar el alerta del usuario

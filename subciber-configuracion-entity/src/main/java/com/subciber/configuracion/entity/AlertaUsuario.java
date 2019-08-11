@@ -17,7 +17,7 @@ public class AlertaUsuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@SequenceGenerator(name = "seq_alertaUsuario", schema="\"AlertaUsuario\"", sequenceName = "\"AlertaUsuario_Id_seq\"", allocationSize = 1)
+	@SequenceGenerator(name = "seq_alertaUsuario", schema="\"Configuracion\"", sequenceName = "\"AlertaUsuario_Id_seq\"", allocationSize = 1)
 	@GeneratedValue(generator = "seq_alertaUsuario")
 	@Column(name="\"Id\"")
 	private Integer id;

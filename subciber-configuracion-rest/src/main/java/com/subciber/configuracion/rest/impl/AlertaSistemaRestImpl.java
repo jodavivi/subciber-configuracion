@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
@@ -24,6 +25,7 @@ import com.subciber.configuracion.business.api.AlertaUsuarioTxBusiness;
 import com.subciber.configuracion.dto.RequestAlertaSistemaDto;
 import com.subciber.configuracion.dto.RequestDeleteObjectDto;
 import com.subciber.configuracion.dto.RequestGenericDto;
+import com.subciber.configuracion.dto.RequestRegistroAlertaSistemaDto;
 import com.subciber.configuracion.dto.ResponseGenericDto;
 import com.subciber.configuracion.exception.BusinessException;
 import com.subciber.configuracion.exception.GeneralException;
@@ -100,6 +102,35 @@ public class AlertaSistemaRestImpl implements AlertaSistemaRest {
 			requestTabla = utilitario.generateRequest(request, httpHeaders, uriInfo);
 			response.setTransaccionId(requestTabla.getAuditRequest().getTransaccionId());
 			response = alertaUsuarioTxBusiness.eliminarAlertaUsuario(requestTabla);
+
+			if (response.getCodigoRespuesta() != messageProvider.codigoExito) {
+				response.setCodigoRespuesta(response.getCodigoRespuesta());
+				response.setMensajeRespuesta(response.getMensajeRespuesta());
+			}
+		} catch (GeneralException e) {
+			response.setCodigoRespuesta(e.getCodigo());
+			response.setMensajeRespuesta(e.getMensaje());
+		} catch (Exception e) {
+			response.setCodigoRespuesta(messageProvider.codigoErrorIdt3);
+			response.setMensajeRespuesta(MessageFormat.format(messageProvider.mensajeErrorIdt3, clase, metodo, e.getStackTrace()[0].getLineNumber(), e.getMessage()));
+		}
+
+		return Response.status(200).entity(response).build();
+	}
+
+	@POST
+	@Path("/")
+	@Produces(MediaType.APPLICATION_JSON+ ";charset=utf-8")	
+	@Override
+	public Response registrarAlertasSistema(RequestRegistroAlertaSistemaDto request) {
+		
+		AuditResponseDto response = null;
+		RequestGenericDto<RequestRegistroAlertaSistemaDto> requestAlerta = null;
+		try {
+			response = new AuditResponseDto();
+			requestAlerta = utilitario.generateRequest(request, httpHeaders, uriInfo);
+			response.setTransaccionId(requestAlerta.getAuditRequest().getTransaccionId());
+			response = alertaUsuarioTxBusiness.registrarAlertaUsuario(requestAlerta);
 
 			if (response.getCodigoRespuesta() != messageProvider.codigoExito) {
 				response.setCodigoRespuesta(response.getCodigoRespuesta());
