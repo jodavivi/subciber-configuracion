@@ -69,10 +69,13 @@ public class AlertaUsuarioTxDaoImpl extends BaseJPADao<AlertaUsuario> implements
 			  Throwable th = e.getCause();
 				  if(th.getCause() instanceof SQLException) {
 					  SQLException cause = (SQLException) th.getCause();
-					  response.setCodigoRespuesta(messageProvider.codigoErrorIdt1);
-					  response.setMensajeRespuesta( MessageFormat.format(messageProvider.mensajeErrorIdt1, clase, metodo, e.getStackTrace()[0].getLineNumber(), tableName, cause.getMessage()));
+					  if(cause.getSQLState().toString().equals("23505")) {
+						  response.setCodigoRespuesta(messageProvider.codigoErrorIdf6);
+					  }else {
+						  response.setCodigoRespuesta(messageProvider.codigoErrorIdt1);
+						  response.setMensajeRespuesta( MessageFormat.format(messageProvider.mensajeErrorIdt1, clase, metodo, e.getStackTrace()[0].getLineNumber(), tableName, cause.getMessage()));
+					  }
 				  	}
-			 
 		}catch(Exception e) {
 			response.setCodigoRespuesta(messageProvider.codigoErrorIdt1);
 			response.setMensajeRespuesta(MessageFormat.format(messageProvider.mensajeErrorIdt1, clase, metodo, e.getStackTrace()[0].getLineNumber(), tableName, e.getMessage()));

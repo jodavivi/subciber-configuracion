@@ -76,7 +76,7 @@ public class AlertaUsuarioTxBusinessImpl implements AlertaUsuarioTxBusiness, Ser
 				requestAlerta.setObjectRequest(usuarioAlerta);
 				AuditResponseDto  registrarAlertaUsuarioResponse = alertaUsuarioTxDao.registrarAlertaUsuario(requestAlerta);
 				
-				if(registrarAlertaUsuarioResponse.getCodigoRespuesta() != messageProvider.codigoExito) {
+				if(registrarAlertaUsuarioResponse.getCodigoRespuesta() < messageProvider.codigoExito) {
 					throw new DaoException(registrarAlertaUsuarioResponse.getCodigoRespuesta(), registrarAlertaUsuarioResponse.getMensajeRespuesta());
 				}
 			}
