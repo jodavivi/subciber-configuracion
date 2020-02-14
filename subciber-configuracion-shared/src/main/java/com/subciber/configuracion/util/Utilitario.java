@@ -119,7 +119,11 @@ public class Utilitario {
 				response.setTerminal(httpHeaders.getHeaderString("terminal"));
 				response.setTransaccionId(httpHeaders.getHeaderString("transaccionId"));
 				response.setUsuario(httpHeaders.getHeaderString("usuario"));
-				response.setUsuarioId(Integer.parseInt(httpHeaders.getHeaderString("usuarioId")));
+				try {
+					response.setUsuarioId(Integer.parseInt(httpHeaders.getHeaderString("usuarioId")));
+				}catch(Exception e) {
+					response.setUsuarioId(0);
+				}
 
 		}catch(GeneralException e) {
 			throw new GeneralException(e.getCodigo(), e.getMensaje());

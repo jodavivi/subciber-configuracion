@@ -7,7 +7,6 @@ import java.util.Properties;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
-import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -34,7 +33,10 @@ import com.subciber.configuracion.util.ConstantesConfig;
 public class EnvioCorreoBusinessImpl implements EnvioCorreoBusiness, Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+//	@Resource(name="java:jboss/mail/Default")
+//	private Session session;
+	
 	@Inject
     private MessageProvider messageProvider;
 	
@@ -54,19 +56,23 @@ public class EnvioCorreoBusinessImpl implements EnvioCorreoBusiness, Serializabl
 		try {
 			subject = request.getObjectRequest().getAsunto(); 
 			auditResponse = new AuditResponseDto();
-			final Session session = Session.getInstance(this.getEmailProperties(), new Authenticator() {
-				@Override
-				protected PasswordAuthentication getPasswordAuthentication() { 
-					return new PasswordAuthentication(ConstantesConfig.CUENTA_CORREO, ConstantesConfig.CLAVE_CORREO);
-				}
-			}); 
+			
+			Properties prop = getEmailProperties();
+			System.out.println(prop.getProperty("javax.net.ssl.trustStore"));
+			 Session session = Session.getInstance(prop,
+		                new javax.mail.Authenticator() {
+		                    protected PasswordAuthentication getPasswordAuthentication() {
+		                        return new PasswordAuthentication("sistema@vivfcons.com","Peru123..@");
+		                    }
+		                });
+			 
 			messageContent =  request.getObjectRequest().getCuerpo(); 
-			final Message message = new MimeMessage(session); 
-			message.setRecipient(Message.RecipientType.TO, new InternetAddress(request.getObjectRequest().getCorreoDestino())); 
+			Message message = new MimeMessage(session);
+			message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(request.getObjectRequest().getCorreoDestino())); 
 			message.setFrom(new InternetAddress(ConstantesConfig.CORREO_ORIGEN)); 
 			message.setSubject(MimeUtility.encodeText(subject,"UTF-8","B")); 
 			message.setContent(messageContent, "text/html; charset=utf-8"); 
-			message.setSentDate(new Date()); 
+			message.setSentDate(new Date());  
 			Transport.send(message); 
 			auditResponse.setCodigoRespuesta(messageProvider.codigoExito);
 			auditResponse.setMensajeRespuesta(messageProvider.mensajeExito);
@@ -79,11 +85,18 @@ public class EnvioCorreoBusinessImpl implements EnvioCorreoBusiness, Serializabl
 	}
 
 	public Properties getEmailProperties() {
-		final Properties config = new Properties(); 
-		config.put("mail.smtp.auth", "true");
-		config.put("mail.smtp.starttls.enable", "false");
-		config.put("mail.smtp.host", ConstantesConfig.SERVIDOR_SMTP);
-		config.put("mail.smtp.port", ConstantesConfig.PORT_SERVIDOR_SMTP); 
-		return config;
+		final Properties prop = System.getProperties();
+		prop.put("mail.smtp.host", "mail.vivfcons.com");
+        prop.put("mail.smtp.port", 465);
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.debug", "true");
+        prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        prop.put("mail.smtp.socketFactory.fallback", "false");
+        prop.setProperty("mail.smtp.quitwait", "false");
+        //prop.setProperty("javax.net.ssl.trustStore", "C:\\Program Files\\Java\\jdk1.8.0_172\\jre\\lib\\security\\cacerts"); // Windows
+        prop.setProperty("javax.net.ssl.trustStore", "/usr/lib/jvm/java-11-openjdk-amd64/lib/security/cacerts"); //Linux
+        prop.setProperty("javax.net.ssl.trustStorePassword", "changeit");
+		return prop;
 	}
+ 
 }

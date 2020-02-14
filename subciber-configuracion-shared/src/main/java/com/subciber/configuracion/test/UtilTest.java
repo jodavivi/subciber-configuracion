@@ -1,27 +1,29 @@
 package com.subciber.configuracion.test;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class UtilTest {
 
 	 public static void main(String[] args) {
 		 
 		 
-		 String demo = "jose|demo";
-		 
-		 String[] parts = demo.split("\\|");
+//		 String demo = "jose|demo";
+//		 
+//		 String[] parts = demo.split("\\|");
 		 
 //		 for(String item : parts) {
 //			 System.out.println(item);
 //		 }
 		 
-		 List<String> l = new ArrayList<>();
-		 l.add("demo");
-		 l.add("jose");
-		 
-		 String str = String.join("|", l);
-		 System.out.println(str);
+//		 List<String> l = new ArrayList<>();
+//		 l.add("demo");
+//		 l.add("jose");
+//		 
+//		 String str = String.join("|", l);
+//		 System.out.println(str);
 //	        String str1 = "s";
 //	        String str2 = "   ";
 //
@@ -41,5 +43,9 @@ public class UtilTest {
 //	            return false;
 //	        return true;
 //	    }
+		 
+		
+		 
+		 
 	 }
 }

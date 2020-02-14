@@ -23,7 +23,7 @@
         <dependent-module archiveName="subciber-configuracion-business-1.0.jar" deploy-path="/" handle="module:/resource/subciber-configuracion-business/subciber-configuracion-business">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="javax.mail-1.6.0.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/com/sun/mail/javax.mail/1.6.0/javax.mail-1.6.0.jar">
+        <dependent-module archiveName="javax.mail-1.6.2.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/com/sun/mail/javax.mail/1.6.2/javax.mail-1.6.2.jar">
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <dependent-module archiveName="activation-1.1.jar" deploy-path="/" handle="module:/classpath/var/M2_REPO/javax/activation/activation/1.1/activation-1.1.jar">
