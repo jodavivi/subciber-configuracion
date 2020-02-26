@@ -78,7 +78,9 @@ public class CORSFilter extends HttpFilter {
 		urlPermitidas.add("http://localhost:80");
 		urlPermitidas.add("http://localhost:8088");
 		urlPermitidas.add("http://localhost");
-		urlPermitidas.add("http://vivfcons.subciber.com");
+	    urlPermitidas.add("http://vivfcons.subciber.com");
+	    urlPermitidas.add("https://vivfcons.subciber.com");
+	    urlPermitidas.add("https://sistema.vivfcons.com");
 
 		boolean permitida = false;
 		for (String urlPermitida : urlPermitidas) {
