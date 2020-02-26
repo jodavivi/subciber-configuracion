@@ -93,8 +93,8 @@ public class EnvioCorreoBusinessImpl implements EnvioCorreoBusiness, Serializabl
         prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         prop.put("mail.smtp.socketFactory.fallback", "false");
         prop.setProperty("mail.smtp.quitwait", "false");
-        prop.setProperty("javax.net.ssl.trustStore", "C:\\Program Files\\Java\\jdk1.8.0_172\\jre\\lib\\security\\cacerts"); // Windows
-        //prop.setProperty("javax.net.ssl.trustStore", "/usr/lib/jvm/java-11-openjdk-amd64/lib/security/cacerts"); //Linux
+        //prop.setProperty("javax.net.ssl.trustStore", "C:\\Program Files\\Java\\jdk1.8.0_172\\jre\\lib\\security\\cacerts"); // Windows
+        prop.setProperty("javax.net.ssl.trustStore", "/usr/lib/jvm/java-11-openjdk-amd64/lib/security/cacerts"); //Linux
         prop.setProperty("javax.net.ssl.trustStorePassword", "changeit");
 		return prop;
 	}
