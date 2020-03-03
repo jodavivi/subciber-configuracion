@@ -78,6 +78,7 @@ public class EnvioCorreoBusinessImpl implements EnvioCorreoBusiness, Serializabl
 			auditResponse.setMensajeRespuesta(messageProvider.mensajeExito);
 			
 		} catch (Exception e) { 
+			e.printStackTrace();
 			throw new  BusinessException(messageProvider.codigoErrorIdt2, MessageFormat.format(messageProvider.mensajeErrorIdt2, clase, metodo, e.getStackTrace()[0].getLineNumber(),  e.getMessage()));
 		}
 		
@@ -86,7 +87,7 @@ public class EnvioCorreoBusinessImpl implements EnvioCorreoBusiness, Serializabl
 
 	public Properties getEmailProperties() {
 		final Properties prop = System.getProperties();
-		prop.put("mail.smtp.host", "mail.vivfcons.com");
+		prop.put("mail.smtp.host", "184.171.242.18");
         prop.put("mail.smtp.port", 465);
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.debug", "true");

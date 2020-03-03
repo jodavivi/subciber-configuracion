@@ -10,7 +10,7 @@ package com.subciber.configuracion.util;
 public class ConstantesConfig {
  
 	public static final String SERVIDOR_SMTP 		= "mail.vivfcons.com";//"subciber.com";
-	public static final int PORT_SERVIDOR_SMTP 		= 465; //25;
+	public static final int PORT_SERVIDOR_SMTP 		= 587; //25;
 	public static final String CUENTA_CORREO 		= "sistema@vivfcons.com";//"vivfcons.subciber.com";
 	public static final String CLAVE_CORREO		 	= "Peru123..@";//"vivfcons2019";
 	public static final String CORREO_ORIGEN 		= "sistema@vivfcons.com";//"vivfcons@subciber.com";
